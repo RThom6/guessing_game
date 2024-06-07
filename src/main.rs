@@ -19,8 +19,12 @@ fn main() {
         /* 
         * Trim trims any whitespace at start and end, 
         * Parse converts to another type defined with {}: [type]
+        * Match allows for error handling instead of error crashing
         */
-        let guess: u32 = guess.trim().parse().expect("Please type a number!"); 
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        }; 
 
 
         match guess.cmp(&secret_number) {
